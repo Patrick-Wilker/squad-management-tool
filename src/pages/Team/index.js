@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import * as Yup from 'yup';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import {Team} from './styles';
 
@@ -7,6 +10,81 @@ import Footer from '../../components/Footer'
 
 
 function TeamPage(){
+    const [name, setName] = useState('')
+    const [website, setWebsite] = useState('')
+    const [description, setDescription] = useState('')
+    const [type, setType] = useState('')
+    const [formation, setFormation] = useState('3 - 2 - 2 - 3')
+
+    const [teams, setTeams] = useState([])
+
+    useEffect(()=>{
+        function loadDatas(){
+            const savedTeams = localStorage.getItem('teams')
+            if(savedTeams){
+                setTeams(JSON.parse(savedTeams))
+            }
+        }
+        loadDatas()
+
+    }, [])
+
+    async function validation(event){
+        event.preventDefault()
+
+        const validation = {
+            name: name, website: website, description: description, type: type, formation: formation
+        }
+
+        const schema = Yup.object().shape({
+            name: Yup
+                .string()
+                .required('Team name is required'),
+            website: Yup
+                .string()
+                .required('Team website is required')
+                .matches(
+                    /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                    'Enter correct URL in the field Team website'
+                ),
+            description: Yup
+                .string()
+                .required('Description is required'),
+            type: Yup
+                .string()
+                .required('Team type is required'),
+            formation: Yup
+                .string()
+                .required('Formation is required')      
+        });
+
+        try {
+            await schema.validate(validation, { abortEarly: false });
+
+            const uptadeTeam = [
+                ...teams, validation
+            ]
+
+            setTeams(uptadeTeam)
+            toast.success('Team successfully created')
+            localStorage.setItem('teams', JSON.stringify(uptadeTeam));
+
+            setName('')
+            setType('')
+            setWebsite('')
+            setDescription('')
+            let inputs = document.querySelectorAll('input[type="radio"]');
+            for (let i = 0, l = inputs.length; i < l; i++){
+                inputs[i].checked = false;
+            }
+            
+        } catch(err){
+            // toast.info(err.errors[0])
+            err.errors.map(e => {
+               toast.info(e) 
+            })
+        }
+    }
 
     return (
         <>
@@ -17,49 +95,59 @@ function TeamPage(){
                     <h1>Create your team</h1>
                 </header>
 
-                <form className="container">
+                <form className="container" onSubmit={validation}>
                     <h2>
                         TEXT INFORMATION
                     </h2>
                     <div className="fields">
                         <div className="field">
                             <input 
-                                name="team-name" 
-                                id="team-name" 
+                                name="name" 
+                                id="name" 
                                 type="text" 
                                 placeholder="Insert team name"
+                                value={name}
+                                onChange= {e => setName(e.target.value)}
                                 required
                             />
-                            <label htmlFor="team-name">Team name</label>
+                            <label htmlFor="name">Team name</label>
                         </div>
                         <div className="field">
                             <input 
-                                name="team-website" 
-                                id="team-website" 
+                                name="website" 
+                                id="website" 
                                 type="text" 
+                                value={website}
                                 placeholder="http://myteam.com"
+                                onChange= {e => setWebsite(e.target.value)}
                                 required
                             />
-                            <label htmlFor="team-website">Team website</label>
+                            <label htmlFor="website">Team website</label>
                         </div>
                         <div className="field">
                             <textarea 
                                 name="description" 
                                 id="description" 
                                 type="text" 
+                                onChange= {e => setDescription(e.target.value)}
+                                value={description}
                                 required
                             />
                             <label htmlFor="description">Description</label>
                         </div>
                         <div className="field">
-                            <span htmlFor="team-type">Team type</span>
+                            <span htmlFor="type">Team type</span>
                             <div className="group-radio">
                                 <div>
-                                    <input type="radio" id="real" name="team-type" value="real" />
+                                    <input type="radio" id="real" name="type" value="real" 
+                                        onChange= {e => setType(e.target.value)} required
+                                    />
                                     <label htmlFor="real">Real</label>
                                 </div>
                                 <div>
-                                    <input type="radio" id="fantasy" name="team-type" value="fantasy" />
+                                    <input type="radio" id="fantasy" name="type" value="fantasy" 
+                                        onChange= {e => setType(e.target.value)} required
+                                    />
                                     <label htmlFor="fantasy">Fantasy</label> 
                                 </div>
                                 
@@ -75,7 +163,10 @@ function TeamPage(){
                         <div className="formation">
                             <label htmlFor="formation">Formation</label>
 
-                            <select name="formation" id="formation">
+                            <select name="formation" id="formation"
+                                onChange= {e => setFormation(e.target.value)}
+                                defaultValue={'3 - 2 - 2 - 3'} required
+                            >
                                 <option value="3 - 2 - 2 - 3">3 - 2 - 2 - 3</option>
                                 <option value="3 - 2 - 3 - 1">3 - 2 - 3 - 1</option>
                                 <option value="3 - 4 - 3">3 - 4 - 3</option>
@@ -96,7 +187,7 @@ function TeamPage(){
                                     id="search" 
                                     type="text" 
                                     placeholder="Ronal"
-                                    required
+                                     
                                 />
                                 <label htmlFor="search">Search Players</label>
                             </div>
@@ -125,7 +216,7 @@ function TeamPage(){
                             </ul>
                         </div>
 
-                        <button type="button">
+                        <button type="submit">
                             Save
                         </button>
                     </section>
