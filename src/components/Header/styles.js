@@ -29,4 +29,21 @@ export const Header = styled.div`
 
         border-radius: 50%;
     }
+
+    @media(max-width: 640px){
+        padding: 15px 8px;
+
+        .logo{
+            font-size: 14px;
+        }
+
+        .login{
+            font-size: 12px;
+        }
+
+        .login span{
+            font-size: 12px;
+            margin-left: 8px;
+        }
+    }
 `;

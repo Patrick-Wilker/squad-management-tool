@@ -17,14 +17,6 @@ const GlobalStyle = createGlobalStyle`
         background: #EEEEEE;
         -webkit-font-smoothing: antialiased !important;
     }
-
-    ::-webkit-scrollbar {
-        width:3px;
-    }
-    
-    ::-webkit-scrollbar-thumb{
-        background:#93939D;
-    }
  
     body, input, button {
         font-size: 14px;
@@ -45,6 +37,7 @@ const GlobalStyle = createGlobalStyle`
         --background: #EEEEEE;
         --gray-line: #dcdde0;
         --text: #666666;
+        --text-dark: #404040;
         --pink: #E31965;
         --purple: #8B2479;
     }
