@@ -33,7 +33,7 @@ export const Home = styled.div`
         color: var(--purple);
     }
 
-    .create-team header > button{
+    .create-team header button{
         border: 0;
         font-size: 0px;
         border-radius: 8px;

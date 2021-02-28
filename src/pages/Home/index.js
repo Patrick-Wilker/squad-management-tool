@@ -5,6 +5,8 @@ import {Home} from './styles';
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
+import {Link} from 'react-router-dom';
+
 import { FaAngleUp, FaAngleDown, FaPen, FaTrash } from "react-icons/fa";
 
 function HomePage(){
@@ -20,9 +22,12 @@ function HomePage(){
         <section className="create-team">
             <header>
                 <h1>My teams</h1>
-                <button type="button">
-                    <span>+</span>
-                </button>
+                <Link to="/team">
+                    <button type="button">
+                        <span>+</span>
+                    </button>  
+                </Link>
+                
             </header>
 
             <main>
