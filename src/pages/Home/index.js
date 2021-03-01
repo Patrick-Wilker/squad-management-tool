@@ -5,8 +5,7 @@ import {Home} from './styles';
 
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-
-import {Link} from 'react-router-dom';
+import HeaderBox from '../../components/HeaderBox'
 
 import { FaAngleUp, FaAngleDown, FaPen, FaTrash } from "react-icons/fa";
 
@@ -52,15 +51,7 @@ function HomePage(){
         <Header/>
         <Home>
         <section className="create-team">
-            <header>
-                <h1>My teams</h1>
-                <Link to="/team">
-                    <button type="button">
-                        <span>+</span>
-                    </button>  
-                </Link>
-                
-            </header>
+            <HeaderBox title="My team" button={true}/>
 
             <main>
                 <table>
@@ -95,9 +86,7 @@ function HomePage(){
 
         <section>
             <section className="players">
-                <header>
-                    <h1>Top 5</h1>
-                </header>
+                <HeaderBox title="Top 5" button={false}/>
 
                 <main>
                     <ul>

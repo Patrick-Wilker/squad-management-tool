@@ -9,20 +9,6 @@ export const Team = styled.div`
         padding: 30px 0;
     }
 
-    .team header{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        padding: 0 30px 30px;
-        margin-bottom: 30px;
-        border-bottom: 1px solid var(--background)
-    }
-
-    .team header h1{
-        color: var(--purple);
-    }
-
     .team h2{
         color: var(--text);
         font-size: 16px;

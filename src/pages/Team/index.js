@@ -7,7 +7,7 @@ import {Team} from './styles';
 
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-
+import HeaderBox from '../../components/HeaderBox'
 
 function TeamPage(){
     const [name, setName] = useState('')
@@ -93,9 +93,7 @@ function TeamPage(){
         <Header/>
         <Team>
             <section className="team">
-                <header>
-                    <h1>Create your team</h1>
-                </header>
+                <HeaderBox title="Create your team" button={false}/>
 
                 <form className="container" onSubmit={validation}>
                     <h2>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Routes from './routes';
+import './setupTests'
 
 import { ToastContainer } from 'react-toastify';
 
