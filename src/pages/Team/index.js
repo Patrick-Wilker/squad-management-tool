@@ -80,8 +80,10 @@ function TeamPage(){
             
         } catch(err){
             // toast.info(err.errors[0])
-            err.errors.map(e => {
-               toast.info(e) 
+            err.errors && err.errors.map(e => {
+                return(
+                   toast.info(e)  
+                )
             })
         }
     }

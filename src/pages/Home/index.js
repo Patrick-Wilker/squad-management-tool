@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import { toast } from 'react-toastify';
 
 import {Home} from './styles';
 
@@ -10,11 +11,42 @@ import {Link} from 'react-router-dom';
 import { FaAngleUp, FaAngleDown, FaPen, FaTrash } from "react-icons/fa";
 
 function HomePage(){
+    const [teams, setTeams] = useState([])
+
+    useEffect(()=>{
+        function loadDatas(){
+            const savedTeams = localStorage.getItem('teams')
+            if(savedTeams){
+                setTeams(JSON.parse(savedTeams))
+            }
+        }
+        loadDatas()
+
+    }, [])
 
     function addBorderPink(id){
         let element = document.getElementById(id);
         element.classList.toggle("focus");
     }
+
+    function updateTable(){
+        const savedTeams = localStorage.getItem('teams')
+        if(savedTeams){
+            setTeams(JSON.parse(savedTeams))
+        }
+    }
+
+    function removeTeam(id){
+        teams.splice(id, 1);
+        setTeams(teams);
+
+        localStorage.setItem('teams', JSON.stringify(teams));
+        
+        updateTable()
+        
+        toast.success('Successfully removed');
+    }
+
     return (
         <>
         <Header/>
@@ -39,51 +71,21 @@ function HomePage(){
                         </tr>  
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Barcelona</td>
-                            <td>Barcelona Squad
-                                <div>
-                                    <span className="remove"><FaTrash/></span>
-                                    <span className="edit"><FaPen/></span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Barcelona</td>
-                            <td>Barcelona Squad
-                                <div>
-                                    <span className="remove"><FaTrash/></span>
-                                    <span className="edit"><FaPen/></span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Barcelona</td>
-                            <td>Barcelona Squad
-                                <div>
-                                    <span className="remove"><FaTrash/></span>
-                                    <span className="edit"><FaPen/></span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Barcelona</td>
-                            <td>Barcelona Squad
-                                <div>
-                                    <span className="remove"><FaTrash/></span>
-                                    <span className="edit"><FaPen/></span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Barcelona</td>
-                            <td>Barcelona Squad
-                                <div>
-                                    <span className="remove"><FaTrash/></span>
-                                    <span className="edit"><FaPen/></span>
-                                </div>
-                            </td>
-                        </tr>
+                        { teams.length > 0 && 
+                            teams.map((team, i) => {
+                                return (
+                                    <tr key={i}>
+                                        <td>{team.name}</td>
+                                        <td>{team.description}
+                                            <div>
+                                                <span className="remove" onClick={()=>removeTeam(i)}><FaTrash/></span>
+                                                <span className="edit"><FaPen/></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
                     </tbody>
                     
                 </table>
