@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Team = styled.div`
+export const Edit = styled.div`
     margin: 40px 40px 0;
 
     .team{
@@ -15,5 +15,4 @@ export const Team = styled.div`
         text-align: center;
         margin-bottom: 30px;
     }
-
-`;
+`

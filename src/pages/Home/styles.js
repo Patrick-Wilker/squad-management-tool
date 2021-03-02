@@ -99,6 +99,14 @@ export const Home = styled.div`
         padding: 5px 8px;
     }
 
+    .create-team tbody td > div > .edit{
+        cursor: not-allowed;
+    }
+
+    .create-team tbody td > div > .remove{
+        cursor: pointer;
+    }
+
     .players main{
         padding: 0 30px;
         display: grid;
@@ -206,6 +214,10 @@ export const Home = styled.div`
             padding: 0px;
         }
 
+        .edit{
+            margin-left: 10px;
+        }
+
         .comparison{
             margin-top: 30px;
             display: block;
@@ -217,6 +229,18 @@ export const Home = styled.div`
 
         .comparison figure{
             justify-content: center;
+        }
+    }
+
+    @media(max-width: 400px){
+
+        .create-team tbody td > div{
+            margin-left: 10px;
+            text-align: end;
+        }
+
+        .edit{
+            margin-left: 0px;
         }
     }
 `;

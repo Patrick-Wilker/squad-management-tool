@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { toast } from 'react-toastify';
 
+// import {Redirect} from 'react-router-dom';
+
 import {Home} from './styles';
 
 import Header from '../../components/Header'
@@ -11,6 +13,7 @@ import { FaAngleUp, FaAngleDown, FaPen, FaTrash } from "react-icons/fa";
 
 function HomePage(){
     const [teams, setTeams] = useState([])
+    // const [redirect, setRedirect] = useState(false)
 
     useEffect(()=>{
         function loadDatas(){
@@ -46,6 +49,12 @@ function HomePage(){
         toast.success('Successfully removed');
     }
 
+    // function edit(id){
+    //     localStorage.setItem('team-edit', JSON.stringify(id));
+
+    //     setRedirect(true);
+    // }
+
     return (
         <>
         <Header/>
@@ -71,6 +80,7 @@ function HomePage(){
                                             <div>
                                                 <span className="remove" onClick={()=>removeTeam(i)}><FaTrash/></span>
                                                 <span className="edit"><FaPen/></span>
+                                                {/* {redirect && <Redirect to="/team/edit" /> } */}
                                             </div>
                                         </td>
                                     </tr>
