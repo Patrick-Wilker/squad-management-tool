@@ -4,6 +4,8 @@
 
 Trata-se de um projeto para gerenciamento de times.
 
+Acesse o site [aqui](https://suspicious-albattani-b7c0b4.netlify.app).
+
 <h2>Como rodar o projeto</h2>
 
 <h3>Instalando dependências</h3>
