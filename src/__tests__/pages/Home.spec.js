@@ -2,8 +2,8 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
-import PageHeader from '../Header/index';
-import PageFooter from '../Footer/index';
+import PageHeader from '../../components/Header/index';
+import PageFooter from '../../components/Footer/index';
 import Home from '../../pages/Home/index';
 
 describe('<Home />', () => {
