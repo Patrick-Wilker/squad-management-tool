@@ -1,10 +1,21 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { expect } from 'chai';
+import { shallow } from 'enzyme';
 
-import PageHeader from '../Header';
+import PageHeader from '../Header/index';
+import PageFooter from '../Footer/index';
+import Home from '../../pages/Home/index';
 
-it("should render an header", ()=>{
-  // const pageHeader = mount(<PageHeader />)
+describe('<Home />', () => {
+  it("should render an header", ()=>{
+    const pageHeader = shallow(<Home />)
 
-  // expect(pageHeader).toHaveLength(1)
+    expect(pageHeader.find(PageHeader)).to.have.lengthOf(1);
+  })
+
+  it("should render an footer", ()=>{
+    const pageHeader = shallow(<Home />)
+
+    expect(pageHeader.find(PageFooter)).to.have.lengthOf(1);
+  })
 })

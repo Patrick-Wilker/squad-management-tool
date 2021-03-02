@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import {Form} from './styles';
 
-function FormPage(props){
+function FormPage(){
     const [name, setName] = useState('')
     const [website, setWebsite] = useState('')
     const [description, setDescription] = useState('')
