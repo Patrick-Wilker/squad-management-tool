@@ -8,14 +8,14 @@ import Home from '../../pages/Home/index';
 
 describe('<Home />', () => {
   it("should render an header", ()=>{
-    const pageHeader = shallow(<Home />)
+    const wrapper = shallow(<Home />)
 
-    expect(pageHeader.find(PageHeader)).to.have.lengthOf(1);
+    expect(wrapper.find(PageHeader)).to.have.lengthOf(1);
   })
 
   it("should render an footer", ()=>{
-    const pageHeader = shallow(<Home />)
+    const wrapper = shallow(<Home />)
 
-    expect(pageHeader.find(PageFooter)).to.have.lengthOf(1);
+    expect(wrapper.find(PageFooter)).to.have.lengthOf(1);
   })
 })
